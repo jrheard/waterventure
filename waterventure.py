@@ -3,10 +3,29 @@ from collections import namedtuple
 from madison_wcb import wcb
 
 
+### Watercolor helper functions
+
+def draw_box(color_index, x, y, width, height):
+    wcb.get_color(color_index)
+    wcb.move_to(x, y)
+    wcb.brush_down()
+
+    wcb.point_in_direction(0)
+    wcb.move_forward(width)
+    wcb.turn_right(90)
+    wcb.move_forward(height)
+    wcb.turn_right(90)
+    wcb.move_forward(width)
+    wcb.turn_right(90)
+    wcb.move_forward(height)
+    wcb.brush_up()
+
+### Game code
+
 Room = namedtuple("Room", ["id", "x", "y", "width", "height", "color_index", "exits", "description"])
 
 end_room = Room(0, 100, 100, 100, 100, 2, {}, "There is a wizard here. He knights you.")
-start_room = Room(1, -200, -200, 100, 100, 0, {'east': end_room}, "It is dark, you might be eaten by a grue.")
+start_room = Room(1, -100, 0, 100, 100, 0, {'east': end_room}, "It is dark, you might be eaten by a grue.")
 
 state = {
     'current_room': start_room,
@@ -30,22 +49,9 @@ def process_command(command):
 def render_room(room):
     if room.id not in state['drawn_rooms']:
         state['drawn_rooms'].add(room.id)
+        draw_box(room.color_index, room.x, room.y, room.width, room.height)
 
-        wcb.get_color(room.color_index)
-        wcb.move_to(room.x, room.y)
-        wcb.brush_down()
-
-        wcb.point_in_direction(0)
-        wcb.move_forward(room.width)
-        wcb.turn_right(90)
-        wcb.move_forward(room.height)
-        wcb.turn_right(90)
-        wcb.move_forward(room.width)
-        wcb.turn_right(90)
-        wcb.move_forward(room.height)
-        wcb.brush_up()
-
-    wcb.move_to(room.x + room.width / 2, room.y + room.height / 2)
+    wcb.move_to(room.x + room.width / 2, room.y - room.height / 2)
 
     print(room.description)
     if room.exits:
