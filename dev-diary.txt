@@ -48,10 +48,35 @@ items:
 
 assorted text:
 
+<intro>
+You're sitting on the couch in your living room, absentmindedly petting your cat Frank,
+when a local news report on the TV catches your attention:
+
 "...that's right, Bob, this year's winter is going to be just truly, unbelievably dark.
 It's barely October, and Portland residents are already preparing for the worst;
 marshmallows and blankets are flying off store shelves, and there isn't a single
 SAD lamp left for sale in the entire city."
+
+Oh no, it's almost winter! Your mom gave you a SAD lamp last year when you were feeling
+super depressed in February, and it sounds like you're really going to need it this year.
+Now where did you put it?
+
+Suddenly nothing in the world is more important to you than finding your special lamp.
+You jump off the couch and begin your search. Frank follows you, meowing.
+
+[This game is a text adventure. Type commands after the >>> and press "enter". Type "help"
+to see a list of some example commands.]
+
+<help text>
+Here are some example commands to try:
+look
+go east
+pet frank
+open door
+
+There are other commands, too, but you've got to figure them out on your own!
+
+
 
 
 
