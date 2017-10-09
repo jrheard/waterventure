@@ -22,19 +22,29 @@ def draw_box(color_index, x, y, width, height):
 
 ### Game code
 
-Room = namedtuple("Room", ["id", "x", "y", "width", "height", "color_index", "exits", "description"])
+Room = namedtuple("Room", ["id", "x", "y", "width", "height", "color_index", "description"])
 
-end_room = Room(0, 100, 100, 100, 100, 2, {}, "There is a wizard here. He knights you.")
-start_room = Room(1, -100, 0, 100, 100, 0, {'east': end_room}, "It is dark, you might be eaten by a grue.")
+world = {
+    'rooms': [
+        Room(0, -100, 0, 100, 100, 0, "It is dark, you might be eaten by a grue."),
+        Room(1, 100, 100, 100, 100, 2, "There is a wizard here. He knights you."),
+    ],
+    # A map of {room_id -> {direction_string: room_id}},
+    # indicating which rooms are connected to which.
+    'connections': {
+        0: {'east': 1},
+    }
+}
 
 state = {
-    'current_room': start_room,
+    'current_room': world['rooms'][0],
     'drawn_rooms': set(),
 }
 
 def travel_in_direction(direction):
     # TODO error handling
-    state['current_room'] = state['current_room'].exits[direction]
+    next_room_id = world['connections'][state['current_room'].id][direction]
+    state['current_room'] = world['rooms'][next_room_id]
 
 def process_command(command):
     words = command.split(" ")
@@ -54,8 +64,9 @@ def render_room(room):
     wcb.move_to(room.x + room.width / 2, room.y - room.height / 2)
 
     print(room.description)
-    if room.exits:
-        print("There are exits in these directions: {0}".format(', '.join(room.exits.keys())))
+    if room.id in world['connections']:
+        exits = world['connections'][room.id]
+        print("There are exits in these directions: {0}".format(', '.join(exits.keys())))
 
 
 def play():
@@ -64,7 +75,7 @@ def play():
     while True:
         render_room(state['current_room'])
 
-        if state['current_room'] == end_room:
+        if state['current_room'] == world['rooms'][-1]:
             input("Congratulations, you won the game! Press Enter to quit.")
             break
 
