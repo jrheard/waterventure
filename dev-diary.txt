@@ -1,0 +1,36 @@
+todo:
+[done] move connections off of Room
+come up with a full map and general plot sketch
+speed up turtle drawing [do in madison_wcb]
+add an extra newline after room description is printed
+
+=======
+
+what should the world look like?
+
+possible settings:
+castle
+spaceship
+modern house
+ancient house
+ruins
+
+possible themes:
+dark souls
+cats
+murder mystery
+ghosts?
+portland, winter is approaching, you're looking for your SAD lamp [i think i like this]
+
+decision: portland winter sad lamp, modern house
+
+target number of rooms: like 10-12
+
+characters:
+* player
+* cat
+* affable ghost
+* TV is on in one room, gives you a random line of news/advertisement whenever you go through the room
+
+puzzles:
+* secret door (conspicuous book/candle near bookshelf)
