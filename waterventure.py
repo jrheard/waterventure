@@ -45,9 +45,6 @@ def describe_hallway():
     else:
         description += "\nA giant picture of your family hangs on the wall. It's incredibly big, stretching from the floor to the ceiling."
 
-#[if you try to open door]It's locked.
-#[if you use the key]You use the weird key to unlock the weird door.<add connection from hallway to end room>
-
     return description
 
 def describe_your_room():
@@ -60,8 +57,6 @@ def describe_your_room():
         description = "It's too dark to see anything. You should probably turn on the lights."
 
     return description
-#[when you turn on lights]You flip the light switch.
-#[when you take key]You take the weird key.
 
 world = {
     'rooms': [
@@ -109,18 +104,58 @@ def travel_in_direction(direction):
 
 
 def process_command(command):
+    command = command.lower()
     words = command.split(" ")
-
-    # TODO help command
-
-#[when you feed frank]Frank gobbles down the treat.
-#He's suddenly filled with energy. He bolts out of the room and runs a lap around the house.
-#You hear a loud crash off in the distance.
-#Frank returns and sits by your feet. He purrs happily.
-#[if you try to feed him again]Frank's full and doesn't want any more treats.
+    in_kitchen = state['current_room'].id == 3
+    in_hallway = state['current_room'].id == 5
+    in_your_room = state['current_room'].id == 6
 
     if words[0] == "go":
         travel_in_direction(words[1])
+
+    elif command == "help":
+        print("""Here are some example commands to try:
+look
+go east
+pet frank
+take key
+
+There are other commands, too, but you've got to figure them out on your own!
+""")
+
+    elif command == "look":
+        render_room(state['current_room'])
+
+    elif command == "pet frank":
+        print("You pet Frank. He purrs contentedly.")
+
+    elif in_kitchen and command in ("feed frank", "give frank a treat", "give treat to frank", "give a treat to frank"):
+        if state['frank_fed']:
+            print("Frank's full and doesn't want any more treats.")
+        else:
+            state['frank_fed'] = True
+            print("""Frank gobbles down the treat.
+He's suddenly filled with energy. He bolts out of the room and runs a lap around the house.
+You hear a loud crash off in the distance.
+Frank returns and sits by your feet. He purrs happily.
+""")
+
+    elif in_your_room and command in ("flip switch", "turn lights on", "turn on lights", "turn light on", "turn on light"):
+        if state['lights_on']:
+            print("The lights are already on.")
+        else:
+            state['lights_on'] = True
+            print("You flip the light switch.")
+
+    elif in_your_room and command in ("take key", "take the key", "pick up the key", "get the key", "get key", "pick up key", "take weird key") and not state['key_taken']:
+        state['key_taken'] = True
+        print("You take the weird key.")
+
+
+# hallway
+#[if you try to open door]It's locked.
+#[if you use the key]You use the weird key to unlock the weird door.<add connection from hallway to end room>
+
     else:
         print("I don't know how to do that. Try something like 'go east'.")
 
