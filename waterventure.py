@@ -61,15 +61,15 @@ def describe_your_room():
 world = {
     'rooms': [
         # TODO deal with coordinates, sizes
-        Room(0, -100, 0, 100, 100, 0, lambda: "A living room. There is a comfy couch here, but you don't want to sit in it right now."),
-        Room(1, -100, 0, 100, 100, 0, lambda: "A dining room. Not much going on in here."),
-        Room(2, -100, 0, 100, 100, 0, lambda: "A bathroom. It's not very interesting."),
-        Room(3, -100, 0, 100, 100, 0, describe_kitchen),
-        Room(4, -100, 0, 100, 100, 0, lambda: "A garage. It's empty - you're all alone for the weekend."),
-        Room(5, -100, 0, 100, 100, 0, describe_hallway),
-        Room(6, -100, 0, 100, 100, 0, describe_your_room),
-        Room(7, -100, 0, 100, 100, 0, lambda: "Your parents' room. You're not supposed to be in here."),
-        Room(8, -100, 0, 100, 100, 0, lambda: "You walk through the weird door and into a strange closet."),
+        Room(0, -130, 50, 50, 50, 0, lambda: "A living room. There is a comfy couch here, but you don't want to sit in it right now."),
+        Room(1, -130, 0, 50, 50, 1, lambda: "A dining room. Not much going on in here."),
+        Room(2, -170, 50, 40, 50, 2, lambda: "A bathroom. It's not very interesting."),
+        Room(3, -180, 0, 50, 50, 3, describe_kitchen),
+        Room(4, -230, 0, 50, 50, 4, lambda: "A garage. It's empty - you're all alone for the weekend."),
+        Room(5, -80, 50, 150, 50, 5, describe_hallway),
+        Room(6, -50, 100, 100, 50, 6, describe_your_room),
+        Room(7, 70, 50, 100, 100, 7, lambda: "Your parents' room. You're not supposed to be in here."),
+        Room(8, -30, 0, 50, 50, 0, lambda: "You walk through the weird door and into a strange closet."),
     ],
     # A map of {room_id -> {direction_string: room_id}},
     # indicating which rooms are connected to which.
@@ -121,8 +121,7 @@ go east
 pet frank
 take key
 
-There are other commands, too, but you've got to figure them out on your own!
-""")
+There are other commands, too, but you've got to figure them out on your own!""")
 
     elif command == "look":
         render_room(state['current_room'])
@@ -147,8 +146,7 @@ He's suddenly filled with energy. He bolts out of the room and runs a lap around
 
 You hear a loud crash off in the distance.
 
-Frank returns and sits by your feet. He purrs happily.
-""")
+Frank returns and sits by your feet. He purrs happily.""")
 
     elif in_your_room and command in ("flip switch", "turn lights on", "turn on lights", "turn light on", "turn on light", "turn on the lights", "turn on lights", "turn on the light"):
         if state['lights_on']:
@@ -221,6 +219,7 @@ Frank meows happily and curls up next to you, basking in the lamp's glorious blu
             input("Congratulations, you've beaten the game! Press Enter to quit.")
             break
 
+        print('')
         process_command(input(">>> "))
 
 
