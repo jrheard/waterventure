@@ -82,8 +82,9 @@ A TV blares in the corner.
 
 <kitchen>
 A kitchen. It's very tidy.
-[if not opened]There's a huge jar of cat treats on the counter. It's tightly closed so Frank can't get into it.
+[if not opened]There's a huge jar of cat treats on the counter. It's tightly closed so that Frank can't get into it.
 [if opened]There's a huge jar of cat treats on the counter. It's open. Frank is frantic with excitement.
+[if opened and frank is already fed]There's a huge jar of cat treats on the counter.
 [when you feed frank]Frank gobbles down the treat.
 He's suddenly filled with energy. He bolts out of the room and runs a lap around the house.
 You hear a loud crash off in the distance.
@@ -91,19 +92,36 @@ Frank returns and sits by your feet. He purrs happily.
 [if you try to feed him again]Frank's full and doesn't want any more treats.
 
 <garage>
-A garage. There aren't any cars here - you're all alone for the weekend.
+A garage. It's empty - you're all alone for the weekend.
 
 <hallway>
 A hallway.
-[if frank hasn't been fed]
-[if frank has been fed]
+[if frank hasn't been fed]A giant picture of your family hangs on the wall. It's incredibly big, stretching from the floor to the ceiling.
+[if frank has been fed]The giant picture of your family has been knocked off of the wall somehow.
+There's a weird door in the wall behind where the painting used to be.
+[if you try to open door]It's locked.
+[if you use the key]You use the weird key to unlock the weird door.<add connection from hallway to end room>
+
+<bathroom>
+A bathroom. It's not very interesting, but every home needs at least one.
+
+<dining room>
+A dining room. Not much going on in here.
+
+<your room>
+[if lights are off]It's too dark to see anything. You should probably turn on the lights.
+[when you turn on lights]You flip the light switch.
+[if lights are on]Your room. Your bed is unmade.
+[if lights are on and key not taken]Your favorite book is on the nightstand. There's a weird key next to it.
+[when you take key]You take the weird key.
+
+<your parents' room>
+Your parents' room. You're not supposed to be in here.
 
 
 
-
-
-You've found your SAD lamp!
-Exhausted, you flop down next to it and turn it on.
-<cat name> meows happily and curls up next to you, basking in the lamp's glorious blue glow.
+You've found your SAD lamp! You can't remember why you put it here in the first place, but that doesn't matter now.
+Exhausted, you turn the lamp on and flop down next to it.
+Frank meows happily and curls up next to you, basking in the lamp's glorious blue glow.
 
 Congratulions, you've beaten the game! Press Enter to quit.
