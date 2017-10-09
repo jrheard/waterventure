@@ -38,10 +38,30 @@ def describe_kitchen():
     return description
 
 def describe_hallway():
-    return "blat"
+    description = "A hallway."
+
+    if state['frank_fed']:
+        description += "\nThe giant picture of your family has been knocked off of the wall somehow.\nThere's a weird door in the wall behind where the painting used to be."
+    else:
+        description += "\nA giant picture of your family hangs on the wall. It's incredibly big, stretching from the floor to the ceiling."
+
+#[if you try to open door]It's locked.
+#[if you use the key]You use the weird key to unlock the weird door.<add connection from hallway to end room>
+
+    return description
 
 def describe_your_room():
-    return "blat"
+    if state['lights_on']:
+        description = "Your room. Your bed is unmade."
+        if not state['key_taken']:
+            description += "\nYour favorite book is on the nightstand. There's a weird key next to it."
+
+    else:
+        description = "It's too dark to see anything. You should probably turn on the lights."
+
+    return description
+#[when you turn on lights]You flip the light switch.
+#[when you take key]You take the weird key.
 
 world = {
     'rooms': [
@@ -76,12 +96,17 @@ state = {
     'jar_opened': False,
     'frank_fed': False,
     'key_taken': False,
+    'lights_on': False,
 }
 
 def travel_in_direction(direction):
-    # TODO error handling
-    next_room_id = world['connections'][state['current_room'].id][direction]
-    state['current_room'] = world['rooms'][next_room_id]
+    connections = world['connections'][state['current_room'].id]
+
+    if direction in connections:
+        state['current_room'] = world['rooms'][connections[direction]]
+    else:
+        print("There isn't an exit in that direction.")
+
 
 def process_command(command):
     words = command.split(" ")
