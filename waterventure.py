@@ -37,6 +37,12 @@ def describe_kitchen():
 
     return description
 
+def describe_hallway():
+    return "blat"
+
+def describe_your_room():
+    return "blat"
+
 world = {
     'rooms': [
         # TODO deal with coordinates, sizes
@@ -45,14 +51,22 @@ world = {
         Room(2, -100, 0, 100, 100, 0, lambda: "A bathroom. It's not very interesting."),
         Room(3, -100, 0, 100, 100, 0, describe_kitchen),
         Room(4, -100, 0, 100, 100, 0, lambda: "A garage. It's empty - you're all alone for the weekend."),
+        Room(5, -100, 0, 100, 100, 0, describe_hallway),
+        Room(6, -100, 0, 100, 100, 0, describe_your_room),
+        Room(7, -100, 0, 100, 100, 0, lambda: "Your parents' room. You're not supposed to be in here."),
+        Room(8, -100, 0, 100, 100, 0, lambda: "You walk through the weird door and into a strange closet."),
     ],
     # A map of {room_id -> {direction_string: room_id}},
     # indicating which rooms are connected to which.
     'connections': {
-        0: {'west': 2, 'south': 1}, # TODO hallway
+        0: {'west': 2, 'south': 1, 'east': 5},
         1: {'north': 0, 'west': 3},
         2: {'east': 0, 'south': 3},
         3: {'north': 2, 'east': 1, 'west': 4},
+        4: {'east': 3},
+        5: {'west': 0, 'north': 6, 'east': 7}, # TODO fill in connection to 8
+        6: {'south': 5},
+        7: {'west': 5},
     }
 }
 
@@ -61,6 +75,7 @@ state = {
     'drawn_rooms': set(),
     'jar_opened': False,
     'frank_fed': False,
+    'key_taken': False,
 }
 
 def travel_in_direction(direction):
@@ -123,7 +138,11 @@ to see a list of some example commands.]
         render_room(state['current_room'])
 
         if state['current_room'] == world['rooms'][-1]:
-            input("Congratulations, you won the game! Press Enter to quit.")
+            print("""You've found your SAD lamp! You can't remember why you put it here in the first place, but that doesn't matter now.
+Exhausted, you turn the lamp on and flop down next to it.
+Frank meows happily and curls up next to you, basking in the lamp's glorious blue glow.
+""")
+            input("Congratulations, you've beaten the game! Press Enter to quit.")
             break
 
         process_command(input(">>> "))
