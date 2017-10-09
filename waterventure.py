@@ -31,7 +31,7 @@ def describe_kitchen():
         if state['frank_fed']:
             description += "\nThere's a huge jar of cat treats on the counter."
         else:
-            description += "\nThere's a huge jar of cat treats on the counter. It's open. Frank is frantic with excitement."
+            description += "\nThere's a huge jar of cat treats on the counter. It's open."
     else:
         description += "\nThere's a huge jar of cat treats on the counter. It's tightly closed so that Frank can't get into it."
 
@@ -41,7 +41,7 @@ def describe_hallway():
     description = "A hallway."
 
     if state['frank_fed']:
-        description += "\nThe giant picture of your family has been knocked off of the wall somehow.\nThere's a weird door behind where the painting used to be."
+        description += "\nA giant picture of your family used to hang on the wall, but it's been knocked down somehow.\nThere's a weird door behind where the picture used to be."
     else:
         description += "\nA giant picture of your family hangs on the wall. It's incredibly big, stretching from the floor to the ceiling."
 
@@ -99,6 +99,7 @@ def travel_in_direction(direction):
 
     if direction in connections:
         state['current_room'] = world['rooms'][connections[direction]]
+        render_room(state['current_room'])
     else:
         print("There isn't an exit in that direction.")
 
@@ -129,6 +130,13 @@ There are other commands, too, but you've got to figure them out on your own!
     elif command == "pet frank":
         print("You pet Frank. He purrs contentedly.")
 
+    elif in_kitchen and command in ("open jar", "take lid off jar", "open the jar"):
+        if state['jar_opened']:
+            print("The jar's already open.")
+        else:
+            state['jar_opened'] = True
+            print("You take the lid off the jar. Frank is frantic with excitement.")
+
     elif in_kitchen and command in ("feed frank", "give frank a treat", "give treat to frank", "give a treat to frank"):
         if state['frank_fed']:
             print("Frank's full and doesn't want any more treats.")
@@ -136,16 +144,18 @@ There are other commands, too, but you've got to figure them out on your own!
             state['frank_fed'] = True
             print("""Frank gobbles down the treat.
 He's suddenly filled with energy. He bolts out of the room and runs a lap around the house.
+
 You hear a loud crash off in the distance.
+
 Frank returns and sits by your feet. He purrs happily.
 """)
 
-    elif in_your_room and command in ("flip switch", "turn lights on", "turn on lights", "turn light on", "turn on light"):
+    elif in_your_room and command in ("flip switch", "turn lights on", "turn on lights", "turn light on", "turn on light", "turn on the lights", "turn on lights", "turn on the light"):
         if state['lights_on']:
             print("The lights are already on.")
         else:
             state['lights_on'] = True
-            print("You flip the light switch.")
+            print("You flip the light switch. The lights turn on - you can see well enough to look around now.")
 
     elif in_your_room and command in ("take key", "take the key", "pick up the key", "get the key", "get key", "pick up key", "take weird key") and not state['key_taken']:
         state['key_taken'] = True
@@ -155,10 +165,12 @@ Frank returns and sits by your feet. He purrs happily.
         print("It's locked.")
 
     elif in_hallway and command in ("open door", "open the door", "unlock door", "unlock the door") and state['key_taken']:
-        print("You use the weird key to unlock the weird door. The door swings open.")
+        print("You use the weird key to unlock the weird door. The door swings open.\n")
 
         # Add connection from hallway to end room.
         world['connections'][5]['south'] = 8
+
+        render_room(state['current_room'])
 
     else:
         print("I don't know how to do that. Try something like 'go east'.")
@@ -198,9 +210,9 @@ You jump off the couch and begin your search. Frank follows you, meowing hungril
 to see a list of some example commands.]
 """)
 
-    while True:
-        render_room(state['current_room'])
+    render_room(state['current_room'])
 
+    while True:
         if state['current_room'] == world['rooms'][-1]:
             print("""You've found your SAD lamp! You can't remember why you put it here in the first place, but that doesn't matter now.
 Exhausted, you turn the lamp on and flop down next to it.
