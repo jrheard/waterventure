@@ -41,7 +41,7 @@ def describe_hallway():
     description = "A hallway."
 
     if state['frank_fed']:
-        description += "\nThe giant picture of your family has been knocked off of the wall somehow.\nThere's a weird door in the wall behind where the painting used to be."
+        description += "\nThe giant picture of your family has been knocked off of the wall somehow.\nThere's a weird door behind where the painting used to be."
     else:
         description += "\nA giant picture of your family hangs on the wall. It's incredibly big, stretching from the floor to the ceiling."
 
@@ -151,10 +151,14 @@ Frank returns and sits by your feet. He purrs happily.
         state['key_taken'] = True
         print("You take the weird key.")
 
+    elif in_hallway and command in ("open door", "open the door") and not state['key_taken']:
+        print("It's locked.")
 
-# hallway
-#[if you try to open door]It's locked.
-#[if you use the key]You use the weird key to unlock the weird door.<add connection from hallway to end room>
+    elif in_hallway and command in ("open door", "open the door", "unlock door", "unlock the door") and state['key_taken']:
+        print("You use the weird key to unlock the weird door. The door swings open.")
+
+        # Add connection from hallway to end room.
+        world['connections'][5]['south'] = 8
 
     else:
         print("I don't know how to do that. Try something like 'go east'.")
