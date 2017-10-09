@@ -6,13 +6,16 @@ add an extra newline after room description is printed
 
 =======
 
-what should the world look like?
+watercolorbot just draws a map of the world that fills in as you explore it
+does not draw puzzles, items
+maybe draws characters but probably doesn't
+
+=======
 
 possible settings:
 castle
 spaceship
-modern house
-ancient house
+modern house ancient house
 ruins
 
 possible themes:
@@ -25,12 +28,36 @@ portland, winter is approaching, you're looking for your SAD lamp [i think i lik
 decision: portland winter sad lamp, modern house
 
 target number of rooms: like 10-12
+going to need at least one hallway
 
 characters:
 * player
 * cat
-* affable ghost
-* TV is on in one room, gives you a random line of news/advertisement whenever you go through the room
+* affable ghost (?)
+* TV is on in one room, gives you a random line of news/advertisement whenever you go through the room; gives you your SAD lamp quest at start of game
 
 puzzles:
 * secret door (conspicuous book/candle near bookshelf)
+* feed the cat his favorite treat
+* turn on the lights in one room
+
+
+items:
+* 
+
+
+assorted text:
+
+"...that's right, Bob, this year's winter is going to be just truly, unbelievably dark.
+It's barely October, and Portland residents are already preparing for the worst;
+marshmallows and blankets are flying off store shelves, and there isn't a single
+SAD lamp left for sale in the entire city."
+
+
+
+
+You've found your SAD lamp!
+Exhausted, you flop down next to it and turn it on.
+<cat name> meows happily and curls up next to you, basking in the lamp's glorious blue glow.
+
+Congratulions, you've beaten the game! Press Enter to quit.
