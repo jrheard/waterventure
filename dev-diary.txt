@@ -33,7 +33,6 @@ going to need at least one hallway
 characters:
 * player
 * cat
-* affable ghost (?)
 * TV is on in one room, gives you a random line of news/advertisement whenever you go through the room; gives you your SAD lamp quest at start of game
 
 puzzles:
@@ -43,7 +42,7 @@ puzzles:
 
 
 items:
-* 
+* key in your room
 
 
 assorted text:
@@ -58,11 +57,11 @@ marshmallows and blankets are flying off store shelves, and there isn't a single
 SAD lamp left for sale in the entire city."
 
 Oh no, it's almost winter! Your mom gave you a SAD lamp last year when you were feeling
-super depressed in February, and it sounds like you're really going to need it this year.
+super depressed, and it sounds like you're really going to need it this year.
 Now where did you put it?
 
 Suddenly nothing in the world is more important to you than finding your special lamp.
-You jump off the couch and begin your search. Frank follows you, meowing.
+You jump off the couch and begin your search. Frank follows you, meowing happily.
 
 [This game is a text adventure. Type commands after the >>> and press "enter". Type "help"
 to see a list of some example commands.]
@@ -72,10 +71,32 @@ Here are some example commands to try:
 look
 go east
 pet frank
-open door
+open drawer
 
 There are other commands, too, but you've got to figure them out on your own!
 
+<living room>
+A living room.
+There is a comfy couch here.
+A TV blares in the corner.
+
+<kitchen>
+A kitchen. It's very tidy.
+[if not opened]There's a huge jar of cat treats on the counter. It's tightly closed so Frank can't get into it.
+[if opened]There's a huge jar of cat treats on the counter. It's open. Frank is frantic with excitement.
+[when you feed frank]Frank gobbles down the treat.
+He's suddenly filled with energy. He bolts out of the room and runs a lap around the house.
+You hear a loud crash off in the distance.
+Frank returns and sits by your feet. He purrs happily.
+[if you try to feed him again]Frank's full and doesn't want any more treats.
+
+<garage>
+A garage. There aren't any cars here - you're all alone for the weekend.
+
+<hallway>
+A hallway.
+[if frank hasn't been fed]
+[if frank has been fed]
 
 
 
