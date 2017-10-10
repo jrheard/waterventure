@@ -78,7 +78,7 @@ world = {
         2: {'east': 0, 'south': 3},
         3: {'north': 2, 'east': 1, 'west': 4},
         4: {'east': 3},
-        5: {'west': 0, 'north': 6, 'east': 7}, # TODO fill in connection to 8
+        5: {'west': 0, 'north': 6, 'east': 7},
         6: {'south': 5},
         7: {'west': 5},
     }
@@ -119,6 +119,7 @@ look
 go east
 pet frank
 take key
+open jar
 
 There are other commands, too, but you've got to figure them out on your own!""")
 
@@ -128,14 +129,14 @@ There are other commands, too, but you've got to figure them out on your own!"""
     elif command == "pet frank":
         print("You pet Frank. He purrs contentedly.")
 
-    elif in_kitchen and command in ("open jar", "take lid off jar", "open the jar"):
+    elif in_kitchen and command in ("open jar", "take lid off jar", "open the jar", "take the lid off the jar"):
         if state['jar_opened']:
             print("The jar's already open.")
         else:
             state['jar_opened'] = True
             print("You take the lid off the jar. Frank is frantic with excitement.")
 
-    elif in_kitchen and command in ("feed frank", "give frank a treat", "give treat to frank", "give a treat to frank"):
+    elif in_kitchen and command in ("feed frank", "give frank a treat", "give treat to frank", "give a treat to frank", "feed frank a treat"):
         if state['frank_fed']:
             print("Frank's full and doesn't want any more treats.")
         else:
@@ -170,7 +171,7 @@ Frank returns and sits by your feet. He purrs happily.""")
         render_room(state['current_room'])
 
     else:
-        print("I don't know how to do that. Try something like 'go east'.")
+        print("I don't know how to do that. Try something like 'go east' or 'help'.")
 
 def render_room(room):
     if room.id not in state['drawn_rooms']:
