@@ -60,16 +60,15 @@ def describe_your_room():
 
 world = {
     'rooms': [
-        # TODO deal with coordinates, sizes
-        Room(0, -130, 50, 50, 50, 0, lambda: "A living room. There is a comfy couch here, but you don't want to sit in it right now."),
+        Room(0, -130, 50, 50, 50, 4, lambda: "A living room. There is a comfy couch here, but you don't want to sit in it right now."),
         Room(1, -130, 0, 50, 50, 1, lambda: "A dining room. Not much going on in here."),
         Room(2, -170, 50, 40, 50, 2, lambda: "A bathroom. It's not very interesting."),
         Room(3, -180, 0, 50, 50, 3, describe_kitchen),
-        Room(4, -230, 0, 50, 50, 4, lambda: "A garage. It's empty - you're all alone for the weekend."),
+        Room(4, -230, 0, 50, 50, 0, lambda: "A garage. It's empty - you're all alone for the weekend."),
         Room(5, -80, 50, 150, 50, 5, describe_hallway),
         Room(6, -50, 100, 100, 50, 6, describe_your_room),
         Room(7, 70, 50, 100, 100, 7, lambda: "Your parents' room. You're not supposed to be in here."),
-        Room(8, -30, 0, 50, 50, 0, lambda: "You walk through the weird door and into a strange closet."),
+        Room(8, -30, 0, 50, 50, 4, lambda: "You walk through the weird door and into a strange closet."),
     ],
     # A map of {room_id -> {direction_string: room_id}},
     # indicating which rooms are connected to which.
