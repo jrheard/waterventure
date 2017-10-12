@@ -6,6 +6,7 @@ from madison_wcb import wcb
 ### Watercolor helper functions
 
 def draw_box(color_index, x, y, width, height):
+    wcb.wash_brush()
     wcb.get_color(color_index)
     wcb.move_to(x, y)
     wcb.brush_down()
