@@ -6,7 +6,6 @@ from madison_wcb import wcb
 ### Watercolor helper functions
 
 def draw_box(color_index, x, y, width, height):
-    wcb.wash_brush()
     wcb.get_color(color_index)
     wcb.move_to(x, y)
     wcb.brush_down()
@@ -20,6 +19,7 @@ def draw_box(color_index, x, y, width, height):
     wcb.turn_right(90)
     wcb.move_forward(height)
     wcb.brush_up()
+    wcb.wash_brush()
 
 ### Game code
 
@@ -217,6 +217,7 @@ to see a list of some example commands.]
 Exhausted, you turn the lamp on and flop down next to it.
 Frank meows happily and curls up next to you, basking in the lamp's glorious blue glow.
 """)
+            wcb.park()
             input("Congratulations, you've beaten the game! Press Enter to quit.")
             break
 
